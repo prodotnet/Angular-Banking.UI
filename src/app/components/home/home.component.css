@@ -1,0 +1,17 @@
+.hero-image {
+    background-image: url('/assets/home.webp'); 
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+}
+
+.hero-image h3 {
+    font-size: 3rem;
+    font-weight: bold;
+}

@@ -1,0 +1,118 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-15">
+            <div class="border rounded-2 p-4">
+                <h2 class="text-center mb-4 text-primary">Sign up</h2>
+                <div *ngIf="isRegistered || isRegistrationFailed" [ngClass]="{
+                    'alert': true,
+                    'alert-success': isRegistered,
+                    'alert-danger': isRegistrationFailed,
+                    'alert-dismissible': true,
+                    'fade': true,
+                    'show': true
+                  }" role="alert">
+                    <ng-container *ngIf="isRegistered; else registrationError">
+                        Registration successful! You can now <a routerLink="/login" class="alert-link">sign in</a>.
+                    </ng-container>
+                    <ng-template #registrationError>
+                        Registration failed. Please try again.
+                    </ng-template>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-6 d-flex justify-content-center align-items-center">
+                        <img src="../assets/login.jpg" alt="Login" style="max-width: 100%; height: 400px;">
+                    </div>
+                    <div class="col-md-6">
+                        <form [formGroup]="registrationForm" (ngSubmit)="Registration()" autocomplete="off"
+                            style="width: 100%;">
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="firstName">Name:</label>
+                                <input formControlName="firstName" id="firstName" type="text" class="form-control"
+                                    [class.is.invalid]="submitted && registrationForm.get('firstName')?.errors" />
+
+                                <span class="text-danger"
+                                    *ngIf="submitted && registrationForm.get('firstName')?.hasError('required')">
+                                    Please provide your name. This field is required.
+                                </span>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="lastName">Surname:</label>
+                                <input formControlName="lastName" id="lastName" type="text" class="form-control"
+                                    [class.is.invalid]="submitted && registrationForm.get('lastName')?.errors" />
+                                <span class="text-danger"
+                                    *ngIf="submitted && registrationForm.get('lastName')?.hasError('required')">
+                                    Please provide your surname. This field is required.
+                                </span>
+                            </div>
+
+
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="email">Email address:</label>
+                                <input formControlName="email" type="email" id="email" class="form-control"
+                                    [class.is.invalid]="submitted && registrationForm.get('email')?.errors" />
+                                <span class="text-danger"
+                                    *ngIf="submitted && registrationForm.get('email')?.hasError('required')">
+                                    Please provide your email. This field is required.
+                                </span>
+                                <span class="text-danger"
+                                    *ngIf="submitted && registrationForm.get('email')?.hasError('pattern')">
+                                    Invalid email address. Please enter a valid email .
+                                </span>
+
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="password">Password:</label>
+                                <input formControlName="password" id="password" type="password" class="form-control"
+                                    [class.is.invalid]="submitted && registrationForm.get('password')?.errors" />
+                                <span class="text-danger"
+                                    *ngIf="submitted && registrationForm.get('password')?.hasError('required')">
+                                    Please provide your password. This field is required.
+                                </span>
+                                <span class="text-danger"
+                                    *ngIf="submitted && (registrationForm.get('password')?.hasError('minLength') || registrationForm.get('password')?.hasError('maxLength'))">
+                                    The password must be at least 6 characters and at most 12 characters long.
+                                </span>
+                            </div>
+
+                            <div class="form-floating" *ngIf="errorMessages.length>0">
+
+                                <app-validations [errorMessage]="errorMessages"></app-validations>
+                            </div>
+
+                            <!-- Checkbox and Forgot password link -->
+                            <div class="row mb-4">
+                                <div class="col d-flex justify-content-start align-items-center">
+                                    <div class="form-check">
+                                        <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <p class="text-center ">Already have an account? <a
+                                            class="text-warning text-decoration-none" routerLink="/login">Sign in</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Spinner for loading state after submit button click -->
+                            <div *ngIf="isLoading" class="d-flex justify-content-center mb-4">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
