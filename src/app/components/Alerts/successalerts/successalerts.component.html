@@ -1,0 +1,17 @@
+
+<div *ngIf="isSuccess || !isSuccess" [ngClass]="{
+  'alert': true,
+  'alert-success': isSuccess,
+  'alert-danger': isSuccess,
+  'alert-dismissible': true,
+  'fade': true,
+  'show': true
+}" role="alert">
+  <ng-container *ngIf="isSuccess; else registrationError">
+      Registration successful! You can now <a routerLink="/login" class="alert-link">SignIn</a>.
+  </ng-container>
+  <ng-template #registrationError>
+      Registration failed. Please try again.
+  </ng-template>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>

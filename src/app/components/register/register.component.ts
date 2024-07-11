@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
 import { CommonModule } from '@angular/common';
 import { ValidationsComponent } from "../validations/validations.component";
 
+
+// Ensure you import the bootstrap type definitions
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-register',
@@ -18,13 +21,13 @@ export class RegisterComponent implements OnInit {
   registrationForm: FormGroup = new FormGroup({});
   submitted = false;
   isRegistered = false;
-  isRegistrationFailed = false;
-  isLoading = false;
+  isRegistrationFailed =false;
   errorMessages: string[] = [];
 
   constructor(
     private authenticationService: AuthenticationService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) { }
 
 
@@ -45,23 +48,40 @@ export class RegisterComponent implements OnInit {
 
   Registration() {
     this.submitted = true;
-    this.errorMessages=[];
+    this.errorMessages = [];
 
 
-    if(this.registrationForm.valid){}
-      this.authenticationService.register(this.registrationForm.value).subscribe({
-        next:(reponse)=>{
-          console.log(reponse);
-        },
-        error:error=>{
-          if(error.error.error){
-            this.errorMessages=error.error.error;
-          }
+    this.authenticationService.register(this.registrationForm.value).subscribe({
+      next: (reponse) => {
+        console.log(reponse);
+        this.isRegistered = true;
+        this.isRegistrationFailed = false;
+        this.router.navigateByUrl('/login') 
          
+      },
+      error: error => {
+        console.log(error);
+        this.isRegistrationFailed = true;
+        this.isRegistered = false;     
+
+        if (error.error.errors) {
+          this.errorMessages = error.error.errors;
+        } else {
+
+          this.errorMessages.push(error.error);
         }
-      })
+
+      },
+      complete: () => {
+        // Open the modal
+        const modalElement = document.getElementById('registrationModal');
+        if (modalElement) {
+          const modal = new bootstrap.Modal(modalElement);
+          modal.show();
+        }
+      }
       
-    
-    
+    });
+
   }
 }
