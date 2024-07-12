@@ -2,22 +2,19 @@
     <div class="row justify-content-center">
         <div class="col-lg-15">
             <div class="border rounded-2 p-4">
-                <h2 class="text-center mb-4 text-primary">Sign up</h2>
+                <h2 class="text-center mb-4 text-primary">Account  Registration</h2>
                 <!-- Modal -->
                 <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="registrationModalLabel">{{ isRegistered ? 'Success' :
+                            <div class="modal-header " [ngClass]="{'bg-success text-white': isRegistered, 'bg-danger text-white': !isRegistered}">
+                                <h5 class="modal-title" id="registrationModalLabel">{{ isRegistered ? 'Registration Successful' :
                                     'Error' }}</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <ng-container *ngIf="isRegistered; else registrationError">
-                                    Registration successful! You can now <a routerLink="/login"
-                                        class="alert-link">SignIn</a>.
+                                    You have successfully registered. You can now Login
                                 </ng-container>
                                 <ng-template #registrationError>
                                     Registration failed. Please try again.
@@ -27,7 +24,9 @@
                                 </ul>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                    (click)="navigateToLogin()">Login</button>
+
                             </div>
                         </div>
                     </div>
@@ -53,7 +52,7 @@
 
                                 <span class="text-danger"
                                     *ngIf="submitted && registrationForm.get('firstName')?.hasError('required')">
-                                    Please provide your first name. This field is required.
+                                    Please provide your first name. 
                                 </span>
                             </div>
 
@@ -64,7 +63,7 @@
                                     [class.is.invalid]="submitted && registrationForm.get('lastName')?.errors" />
                                 <span class="text-danger"
                                     *ngIf="submitted && registrationForm.get('lastName')?.hasError('required')">
-                                    Please provide your last name. This field is required.
+                                    Please provide your last name. 
                                 </span>
                             </div>
 
@@ -76,11 +75,11 @@
                                     [class.is.invalid]="submitted && registrationForm.get('email')?.errors" />
                                 <span class="text-danger"
                                     *ngIf="submitted && registrationForm.get('email')?.hasError('required')">
-                                    Please provide your email. This field is required.
+                                    Please provide your email. 
                                 </span>
                                 <span class="text-danger"
                                     *ngIf="submitted && registrationForm.get('email')?.hasError('pattern')">
-                                    Invalid email address. Please enter a valid email .
+                                     Please enter a valid email .
                                 </span>
 
                             </div>
@@ -92,13 +91,25 @@
                                     [class.is.invalid]="submitted && registrationForm.get('password')?.errors" />
                                 <span class="text-danger"
                                     *ngIf="submitted && registrationForm.get('password')?.hasError('required')">
-                                    Please provide your password. This field is required.
+                                    Please provide your password.
                                 </span>
                                 <span class="text-danger"
                                     *ngIf="submitted && registrationForm.get('password')?.hasError('minlength') || registrationForm.get('password')?.hasError('maxlength')">
                                     The password must be at least 6 characters and at most 12 characters long.
                                 </span>
                             </div>
+
+
+                            <!-- Loading Spinner -->
+                            <div *ngIf="isLoading" class="d-flex justify-content-center my-4">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+
+
+
+
 
                             <!--Backend validations-->
                             <div class="form-floating" *ngIf="errorMessages.length>0">
@@ -110,12 +121,12 @@
                             <div class="row mb-4">
                                 <div class="col d-flex justify-content-start align-items-center">
                                     <div class="form-check">
-                                        <button type="submit" class="btn btn-primary btn-block">SignUp</button>
+                                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <p class="text-center ">Already have an account? <a
-                                            class="text-warning text-decoration-none" routerLink="/login">SignIn</a>
+                                            class="text-warning text-decoration-none" routerLink="/login">Login</a>
                                     </p>
                                 </div>
                             </div>

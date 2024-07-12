@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { ValidationsComponent } from "../validations/validations.component";
 
 
-// Ensure you import the bootstrap type definitions
+
 declare var bootstrap: any;
 
 @Component({
@@ -21,7 +21,8 @@ export class RegisterComponent implements OnInit {
   registrationForm: FormGroup = new FormGroup({});
   submitted = false;
   isRegistered = false;
-  isRegistrationFailed =false;
+  isRegistrationFailed = false;
+  isLoading = false;
   errorMessages: string[] = [];
 
   constructor(
@@ -48,40 +49,52 @@ export class RegisterComponent implements OnInit {
 
   Registration() {
     this.submitted = true;
+    this.isLoading = true;
     this.errorMessages = [];
 
+   // if (this.registrationForm.valid) {}
+      this.authenticationService.register(this.registrationForm.value).subscribe({
+        next: (reponse) => {
+          console.log(reponse);
+          this.isRegistered = true;
+          this.isRegistrationFailed = false;
+          this.isLoading = false;
 
-    this.authenticationService.register(this.registrationForm.value).subscribe({
-      next: (reponse) => {
-        console.log(reponse);
-        this.isRegistered = true;
-        this.isRegistrationFailed = false;
-        this.router.navigateByUrl('/login') 
-         
-      },
-      error: error => {
-        console.log(error);
-        this.isRegistrationFailed = true;
-        this.isRegistered = false;     
+        },
+        error: error => {
+          console.log(error);
+          this.isRegistrationFailed = true;
+          this.isRegistered = false;
+          this.isLoading = false;
 
-        if (error.error.errors) {
-          this.errorMessages = error.error.errors;
-        } else {
+          if (error.error.errors) {
+            this.errorMessages = error.error.errors;
+          } else {
 
-          this.errorMessages.push(error.error);
+            this.errorMessages.push(error.error);
+          }
+
+        },
+        complete: () => {
+          // Open the modal
+          const modalElement = document.getElementById('registrationModal');
+          if (modalElement) {
+            const modal = new bootstrap.Modal(modalElement);
+            modal.show();
+
+
+          }
         }
 
-      },
-      complete: () => {
-        // Open the modal
-        const modalElement = document.getElementById('registrationModal');
-        if (modalElement) {
-          const modal = new bootstrap.Modal(modalElement);
-          modal.show();
-        }
-      }
-      
-    });
-
+      });
+    
   }
+
+  navigateToLogin() {
+    this.router.navigateByUrl('/login');
+  }
+
 }
+
+
+
