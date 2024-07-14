@@ -1,5 +1,5 @@
 
-<section class="pb-4">
+<section class="pb-4"*ngIf="!(authenticationService.user$ | async)">
     <div class="border rounded-5">
       
       <section class="p-4">

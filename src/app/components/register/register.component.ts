@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
     this.isLoading = true;
     this.errorMessages = [];
 
-   // if (this.registrationForm.valid) {}
+    
       this.authenticationService.register(this.registrationForm.value).subscribe({
         next: (reponse) => {
           console.log(reponse);
@@ -87,7 +87,7 @@ export class RegisterComponent implements OnInit {
         }
 
       });
-    
+   
   }
 
   navigateToLogin() {

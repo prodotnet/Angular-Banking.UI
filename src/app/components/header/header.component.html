@@ -1,4 +1,4 @@
-<header class="navbar navbar-expand-lg bg-body-tertiary  " data-bs-theme="dark">
+<header class="navbar navbar-expand-lg bg-body-tertiary  " data-bs-theme="dark" *ngIf="!(authenticationService.user$ | async)">
     <div class="container-fluid">
       <a class="btn btn-primary" href="#"><i  class="fa-solid fa-building-columns"></i> Pro Banking</a>
       

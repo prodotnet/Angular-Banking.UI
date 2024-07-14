@@ -1,120 +1,24 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 mb-lg-0 text-white bg-dark" style="width: 270px;">
-  <!-- Brand Logo -->
-  <div class="dropdown">
-    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-      <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-      <strong>mdo</strong>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-      <li><a class="dropdown-item" href="#">New project...</a></li>
-      <li><a class="dropdown-item" href="#">Settings</a></li>
-      <li><a class="dropdown-item" href="#">Profile</a></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="#">Sign out</a></li>
-    </ul>
+ <main class="content p-3">
+  Your main content goes here 
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-6 mb-4">
+              <div class="card">
+                  <div class="card-body">
+                      <h5 class="card-title">Welcome Back, </h5>
+                      <p class="card-text">Explore your dashboard and manage your account.</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 mb-4">
+              <div class="card">
+                  <div class="card-body">
+                      <h5 class="card-title">Total Earnings</h5>
+                      <p class="card-text">$78.00</p>
+                      <span class="badge text-success">+9.0% Since Last Month</span>
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
-  <hr>
-
-  <!-- Sidebar Navigation -->
-  <ul class="nav nav-pills flex-column mb-auto">
-    <!-- Dashboard -->
-    <li class="nav-item">
-      <a href="dashboard.html" class="nav-link text-white">
-        <i class="fas fa-tachometer-alt me-2"></i>
-        <span>Dashboard</span>
-      </a>
-    </li>
-
-    <!-- Account Management -->
-    <li class="nav-item">
-      <a class="nav-link text-white" data-bs-toggle="collapse" href="#accountManagement" role="button" aria-expanded="false" aria-controls="accountManagement">
-        <i class="fas fa-user me-2"></i>
-        <span>Account Management</span>
-
-        <i class="fas fa-chevron-down ms-auto"></i>
-
-      </a>
-      <ul class="collapse ms-3" id="accountManagement">
-        <li><a href="account-overview.html" class="nav-link text-white">Account Overview</a></li>
-        <li><a href="account-details.html" class="nav-link text-white">Account Details</a></li>
-        <li><a href="update-profile.html" class="nav-link text-white">Update Profile</a></li>
-        <li><a href="change-password.html" class="nav-link text-white">Change Password</a></li>
-      </ul>
-    </li>
-
-    <!-- Transactions -->
-    <li class="nav-item">
-      <a class="nav-link text-white" data-bs-toggle="collapse" href="#transactions" role="button" aria-expanded="false" aria-controls="transactions">
-        <i class="fas fa-exchange-alt me-2"></i>
-        <span>Transactions</span>
-        <i class="fas fa-chevron-down ms-auto"></i>
-      </a>
-      <ul class="collapse ms-3" id="transactions">
-        <li><a href="transfer-funds.html" class="nav-link text-white">Transfer Funds</a></li>
-        <li><a href="transaction-history.html" class="nav-link text-white">Transaction History</a></li>
-        <li><a href="pay-bills.html" class="nav-link text-white">Pay Bills</a></li>
-      </ul>
-    </li>
-
-    <!-- Loans -->
-    <li class="nav-item">
-      <a class="nav-link text-white" data-bs-toggle="collapse" href="#loans" role="button" aria-expanded="false" aria-controls="loans">
-        <i class="fas fa-money-bill-wave me-2"></i>
-        <span>Loans</span>
-        <i class="fas fa-chevron-down ms-auto"></i>
-      </a>
-      <ul class="collapse ms-3" id="loans">
-        <li><a href="apply-loan.html" class="nav-link text-white">Apply for a Loan</a></li>
-        <li><a href="loan-status.html" class="nav-link text-white">Loan Status</a></li>
-        <li><a href="loan-repayment.html" class="nav-link text-white">Repay Loan</a></li>
-      </ul>
-    </li>
-
-    <!-- Cards -->
-    <li class="nav-item">
-      <a class="nav-link text-white" data-bs-toggle="collapse" href="#cards" role="button" aria-expanded="false" aria-controls="cards">
-        <i class="fas fa-credit-card me-2"></i>
-        <span>Cards</span>
-        <i class="fas fa-chevron-down ms-auto"></i>
-      </a>
-      <ul class="collapse ms-3" id="cards">
-        <li><a href="view-cards.html" class="nav-link text-white">View Cards</a></li>
-        <li><a href="block-unblock-card.html" class="nav-link text-white">Block/Unblock Card</a></li>
-        <li><a href="report-lost-card.html" class="nav-link text-white">Report Lost Card</a></li>
-      </ul>
-    </li>
-
-    <!-- Customer Support -->
-    <li class="nav-item">
-      <a href="support.html" class="nav-link text-white">
-        <i class="fas fa-headset me-2"></i>
-        <span>Customer Support</span>
-      </a>
-    </li>
-
-    <!-- Settings -->
-    <li class="nav-item">
-      <a class="nav-link text-white" data-bs-toggle="collapse" href="#settings" role="button" aria-expanded="false" aria-controls="settings">
-        <i class="fas fa-cogs me-2"></i>
-        <span>Settings</span>
-        <i class="fas fa-chevron-down ms-auto"></i>
-      </a>
-      <ul class="collapse ms-3" id="settings">
-        <li><a href="app-settings.html" class="nav-link text-white">App Settings</a></li>
-        <li><a href="manage-notifications.html" class="nav-link text-white">Manage Notifications</a></li>
-        <li><a href="privacy-policy.html" class="nav-link text-white">Privacy Policy</a></li>
-        <li><a href="terms-of-service.html" class="nav-link text-white">Terms of Service</a></li>
-      </ul>
-    </li>
-
-    <!-- Documentation -->
-    <li class="nav-item">
-      <a href="https://example.com/docs" class="nav-link text-white" target="_blank">
-        <i class="fas fa-book me-2"></i>
-        <span>Documentation</span>
-      </a>
-    </li>
-  </ul>
-  
-
-</div>
+</main>

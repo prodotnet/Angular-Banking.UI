@@ -1,4 +1,4 @@
- <nav class="navbar navbar-expand-lg bg-body-tertiary">
+ <nav class="navbar navbar-expand-lg bg-body-tertiary" *ngIf="!(authenticationService.user$ | async)">
     <div class="container">
       
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,7 +16,7 @@
 
          
 
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" >
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Accounts
             </a>
@@ -39,7 +39,7 @@
             <a class="nav-link" href="#">FAQs</a>
           </li>
         </ul>
-        <form class="d-flex" role="search">
+        <form class="d-flex" role="search" *ngIf="(authenticationService.user$ | async) === null">
           <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search">
           <a class="btn btn-outline-warning"  routerLink ="/login"> Login</a>
 
@@ -52,3 +52,128 @@
 
     </div>
   </nav>
+
+<!-- Once the user logs in -->
+<div class="wrapper d-flex" *ngIf="(authenticationService.user$ | async) as UserDTO">
+  <aside id="sidebar" class="bg-dark text-white p-4" style="width: 260px;">
+      
+    <div class="dropdown">
+      <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+       <p class="text-success">Welcome Back, <strong class="text-primary">{{(authenticationService.user$ | async)?.firstName | titlecase}}</strong></p>
+      </a>
+      <ul class="dropdown-menu btn btn-primary text-primary shadow" aria-labelledby="dropdownUser2">
+        <li><a class="dropdown-item" href="#">Set Targets</a></li>
+        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li><a class="dropdown-item" href="#">Update Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#">Change Password</a></li>
+      </ul>
+    </div>
+ 
+
+    <hr/>
+    <!-- Sidebar Header -->
+      <div class="sidebar-header d-flex align-items-center mb-4">
+          <i class="fas fa-university fa-2x me-2"></i>
+          <p class="mb-0 text-primary">Pro Banking</p>
+      </div>
+     <hr/>
+
+     
+      <!-- Sidebar Navigation -->
+      <ul class="nav flex-column p-4 mb-4">
+         
+        
+        
+        <li class="nav-item mb-0">
+              <a routerLink="/dashboard" class="nav-link text-white d-flex align-items-left">
+                  <i class="fas fa-tachometer-alt me-2"></i>
+                  <span>Dashboard</span>
+              </a>
+          </li>
+
+          
+
+          <li class="nav-item mb-0">
+              <a class="nav-link text-white d-flex align-items-center" data-bs-toggle="collapse" href="#transactions" role="button" aria-expanded="false" aria-controls="transactions">
+                  <i class="fas fa-exchange-alt me-2"></i>
+                  <span>Transactions</span>
+                  <i class="fas fa-chevron-down ms-auto"></i>
+              </a>
+              <ul class="collapse ms-3" id="transactions">
+                  <li><a href="transfer-funds.html" class="nav-link text-white">Transfer Funds</a></li>
+                  <li><a href="transaction-history.html" class="nav-link text-white">Transaction History</a></li>
+                  <li><a href="pay-bills.html" class="nav-link text-white">Pay Bills</a></li>
+              </ul>
+          </li>
+
+          <li class="nav-item mb-2">
+              <a class="nav-link text-white d-flex align-items-center" data-bs-toggle="collapse" href="#loans" role="button" aria-expanded="false" aria-controls="loans">
+                  <i class="fas fa-money-bill-wave me-2"></i>
+                  <span>Loans</span>
+                  <i class="fas fa-chevron-down ms-auto"></i>
+              </a>
+              <ul class="collapse ms-3" id="loans">
+                  <li><a href="apply-loan.html" class="nav-link text-white">Apply for a Loan</a></li>
+                  <li><a href="loan-status.html" class="nav-link text-white">Loan Status</a></li>
+                  <li><a href="loan-repayment.html" class="nav-link text-white">Repay Loan</a></li>
+              </ul>
+          </li>
+
+          <li class="nav-item mb-2">
+              <a class="nav-link text-white d-flex align-items-center" data-bs-toggle="collapse" href="#cards" role="button" aria-expanded="false" aria-controls="cards">
+                  <i class="fas fa-credit-card me-2"></i>
+                  <span>Cards</span>
+                  <i class="fas fa-chevron-down ms-auto"></i>
+              </a>
+              <ul class="collapse ms-3" id="cards">
+                  <li><a href="view-cards.html" class="nav-link text-white">View Cards</a></li>
+                  <li><a href="block-unblock-card.html" class="nav-link text-white">Block/Unblock Card</a></li>
+                  <li><a href="report-lost-card.html" class="nav-link text-white">Report Lost Card</a></li>
+              </ul>
+          </li>
+
+          <li class="nav-item mb-2">
+              <a href="support.html" class="nav-link text-white d-flex align-items-center">
+                  <i class="fas fa-headset me-2"></i>
+                  <span>Customer Support</span>
+              </a>
+          </li>
+
+          <li class="nav-item mb-2">
+              <a class="nav-link text-white d-flex align-items-center" data-bs-toggle="collapse" href="#settings" role="button" aria-expanded="false" aria-controls="settings">
+                  <i class="fas fa-cogs me-2"></i>
+                  <span>Settings</span>
+                  <i class="fas fa-chevron-down ms-auto"></i>
+              </a>
+              <ul class="collapse ms-3" id="settings">
+                  <li><a href="app-settings.html" class="nav-link text-white">App Settings</a></li>
+                  <li><a href="manage-notifications.html" class="nav-link text-white">Manage Notifications</a></li>
+                  <li><a href="privacy-policy.html" class="nav-link text-white">Privacy Policy</a></li>
+                  <li><a href="terms-of-service.html" class="nav-link text-white">Terms of Service</a></li>
+              </ul>
+          </li>
+
+          <li class="nav-item">
+              <a href="https://example.com/docs" class="nav-link text-white d-flex align-items-center" target="_blank">
+                  <i class="fas fa-book me-2"></i>
+                  <span>Documentation</span>
+              </a>
+          </li>
+      </ul>
+  </aside>
+
+  <div class="main flex-grow-1">
+      <nav class="navbar bg-dark shadow-sm">
+        <div class="container-fluid">
+          <a class="navbar-brand">
+            
+          </a>
+          <form class="d-flex" role="search">
+            <button class="btn btn-outline-warning" (click)="logout()">Logout</button>
+          </form>
+        </div>
+      </nav>
+      <router-outlet></router-outlet>
+  </div>
+</div>
